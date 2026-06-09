@@ -1,0 +1,19 @@
+# ── Development source — kept on local disk, NOT in the public distribution repo ─
+# This repo publishes ONLY the Pocket distribution (Cores/ Assets/ Platforms/).
+# The FPGA source and build/packaging scripts stay local and are never pushed.
+src/
+*.py
+mister_source/
+quartus_build.log
+
+# ── Claude Code local tooling ─────────────────────────────────────────────────
+.claude/
+
+# ── Copyrighted ROMs — kept on local disk, NEVER committed ────────────────────
+# The romset lives under Assets/<platform>/common/ for local testing only.
+*.rom
+*.zip
+Assets/**/common/*.rom
+
+# ── Legacy build output ───────────────────────────────────────────────────────
+dist/

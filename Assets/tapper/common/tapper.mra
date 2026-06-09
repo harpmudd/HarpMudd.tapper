@@ -1,0 +1,60 @@
+<misterromdescription>
+	<name>Tapper</name>
+	<setname>tapper</setname>
+	<version>Budweiser, 840127</version>
+	<year>1983</year>
+	<manufacturer>Bally / Midway</manufacturer>
+	<platform>Midway MCR3</platform>
+	<category>Action</category>
+	<rotation>horizontal</rotation>
+	<resolution>15kHz</resolution>
+	<players>2 (alternating)</players>
+	<joystick>4-way</joystick>
+	<num_buttons>1</num_buttons>
+
+	<!--
+	  HarpMudd Tapper — Analogue Pocket core.
+
+	  This .mra is the ROM-assembly recipe for the HarpMudd Tapper Pocket core.
+	  It contains NO copyrighted ROM data — only part filenames, CRC32s, and the
+	  concatenation order. Supply your own MAME "tapper.zip" (the 1-27-84
+	  Budweiser set) and run it through the `mra` tool to produce "tapper.rom":
+
+	      mra tapper.mra            (writes tapper.rom)
+
+	  Then copy tapper.rom into  Assets/tapper/common/  on your Pocket SD card.
+
+	  The single index="0" section below assembles to exactly 0x3A000 (237568)
+	  bytes, in the order the core's data_loader expects:
+	      0x00000  Z80 main CPU program  (3 x 16K + 1 x 8K = 56K)
+	      0x0E000  SSIO sound CPU program (4 x 4K = 16K)
+	      0x12000  sprite / foreground graphics (8 x 16K = 128K)
+	      0x32000  background tile ROMs (2 x 16K = 32K)
+	  Byte-lane interleaving of the sprite ROMs is done in the FPGA at load time,
+	  so the file itself is a straight concatenation (no <interleave>).
+	-->
+	<rom index="0" zip="tapper.zip" md5="none">
+		<!-- Z80 main CPU program -->
+		<part crc="bb060bb0" name="tapper_c.p.u._pg_0_1c_1-27-84.1c"></part>
+		<part crc="fd9acc22" name="tapper_c.p.u._pg_1_2c_1-27-84.2c"></part>
+		<part crc="b3755d41" name="tapper_c.p.u._pg_2_3c_1-27-84.3c"></part>
+		<part crc="77273096" name="tapper_c.p.u._pg_3_4c_1-27-84.4c"></part>
+		<!-- SSIO sound CPU program -->
+		<part crc="0e8bb9d5" name="tapper_sound_snd_0_a7_12-7-83.a7"></part>
+		<part crc="0cf0e29b" name="tapper_sound_snd_1_a8_12-7-83.a8"></part>
+		<part crc="31eb6dc6" name="tapper_sound_snd_2_a9_12-7-83.a9"></part>
+		<part crc="01a9be6a" name="tapper_sound_snd_3_a10_12-7-83.a10"></part>
+		<!-- Sprite / foreground graphics -->
+		<part crc="32509011" name="tapper_video_fg_1_a7_12-7-83.a7"></part>
+		<part crc="8412c808" name="tapper_video_fg_0_a8_12-7-83.a8"></part>
+		<part crc="818fffd4" name="tapper_video_fg_3_a5_12-7-83.a5"></part>
+		<part crc="67e37690" name="tapper_video_fg_2_a6_12-7-83.a6"></part>
+		<part crc="800f7c8a" name="tapper_video_fg_5_a3_12-7-83.a3"></part>
+		<part crc="32674ee6" name="tapper_video_fg_4_a4_12-7-83.a4"></part>
+		<part crc="070b4c81" name="tapper_video_fg_7_a1_12-7-83.a1"></part>
+		<part crc="a37aef36" name="tapper_video_fg_6_a2_12-7-83.a2"></part>
+		<!-- Background tile ROMs -->
+		<part crc="2a30238c" name="tapper_c.p.u._bg_1_6f_12-7-83.6f"></part>
+		<part crc="394ab576" name="tapper_c.p.u._bg_0_5f_12-7-83.5f"></part>
+	</rom>
+</misterromdescription>
