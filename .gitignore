@@ -17,3 +17,7 @@ Assets/**/common/*.rom
 
 # ── Legacy build output ───────────────────────────────────────────────────────
 dist/
+
+# Python bytecode cache (regenerated whenever a *.py is imported)
+__pycache__/
+*.pyc
