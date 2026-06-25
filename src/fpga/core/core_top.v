@@ -166,10 +166,10 @@ assign aux_scl   = 1'bZ;
 
 assign bridge_endian_little = 1'b0;
 
-// -- PLL -- 74.25 MHz -> clk_sys (40 MHz) + clk_vid (10 MHz, 0 and 90 deg) ---
+// -- PLL -- 74.25 MHz -> clk_sys (40 MHz) + clk_vid (20 MHz, 0 and 90 deg) ---
 wire clk_sys;       // 40 MHz - mcr3.clock_40 + bridge/ROM loader/audio
-wire clk_vid;       // 10 MHz - pixel clock (0 deg)
-wire clk_vid_90;    // 10 MHz - pixel clock (90 deg, APF DDR encode edge)
+wire clk_vid;       // 20 MHz - pixel clock (0 deg)
+wire clk_vid_90;    // 20 MHz - pixel clock (90 deg, APF DDR encode edge)
 wire pll_locked;
 wire pll_locked_s;
 
@@ -506,7 +506,11 @@ wire [7:0]  output_4_unused;
 mcr3 mcr3_core (
     .clock_40       (clk_sys),
     .reset          (~game_reset_n),
-    .tv15Khz_mode   (1'b1),                // 15 kHz (standard arcade)
+    .tv15Khz_mode   (1'b0),                // 0 = true progressive (512x480, 20MHz pixel).
+                                           // 15kHz mode (=1) simulates interlace by toggling
+                                           // the sprite field bit each frame -> sprites shimmer
+                                           // on the Pocket's progressive panel. 480p draws full
+                                           // sprites every frame (no toggle).
 
     .video_r        (vid_r),
     .video_g        (vid_g),
