@@ -1,17 +1,17 @@
 <misterromdescription>
-	<name>Tapper (Budweiser, 1-27-84)</name>
+	<name>Tapper (Budweiser, 1-12-84)</name>
 	<setname>tapper</setname>
 	<year>1983</year>
 	<manufacturer>Bally Midway</manufacturer>
 	<!--
-	  HarpMudd Tapper (Budweiser, 1-27-84) - Analogue Pocket core ROM recipe (no copyrighted data).
-	  Build:  mra tapper.mra   then copy the .rom into Assets/tapper/common/.
+	  HarpMudd Tapper (Budweiser, 1-12-84) - Analogue Pocket core ROM recipe (no copyrighted data).
+	  Build:  mra tappera.mra   then copy the .rom into Assets/tapper/common/.
 	-->
-	<rom index="0" zip="tapper.zip" md5="none">
-		<part crc="bb060bb0" name="tapper_c.p.u._pg_0_1c_1-27-84.1c"></part>
-		<part crc="fd9acc22" name="tapper_c.p.u._pg_1_2c_1-27-84.2c"></part>
-		<part crc="b3755d41" name="tapper_c.p.u._pg_2_3c_1-27-84.3c"></part>
-		<part crc="77273096" name="tapper_c.p.u._pg_3_4c_1-27-84.4c"></part>
+	<rom index="0" zip="tapper.zip|tappera.zip" md5="none">
+		<part crc="127171d1" name="tapper_c.p.u._pg_0_1c_1-12-84.1c"></part>
+		<part crc="9d6a47f7" name="tapper_c.p.u._pg_1_2c_1-12-84.1c"></part>
+		<part crc="3a1f8778" name="tapper_c.p.u._pg_2_3c_1-12-84.3c"></part>
+		<part crc="e8dcdaa4" name="tapper_c.p.u._pg_3_4c_1-12-84.4c"></part>
 		<part crc="0e8bb9d5" name="tapper_sound_snd_0_a7_12-7-83.a7"></part>
 		<part crc="0cf0e29b" name="tapper_sound_snd_1_a8_12-7-83.a8"></part>
 		<part crc="31eb6dc6" name="tapper_sound_snd_2_a9_12-7-83.a9"></part>

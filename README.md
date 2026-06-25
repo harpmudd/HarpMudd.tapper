@@ -65,9 +65,15 @@ library. The selected edition is loaded by its `.json`.
 
 ROMs are **not** included — nothing in this repo contains copyrighted data.
 Supply your own MAME romsets (`tapper`, `rbtapper`, `sutapper`, `tapperg`,
-`tappera`, `tapperb`, `timber`) and build the per-game `.rom` images with
-`pack_rom.py` into `Assets/tapper/common/`. `pack_rom.py` matches the required
-files by CRC32, so it only assembles the correct, verified dumps.
+`tappera`, `tapperb`, `timber`) and build the per-game `.rom` images into
+`Assets/tapper/common/` by either:
+
+- **`.mra` recipe** (one per game in `Assets/tapper/common/`): run it through the
+  standard `mra` tool — e.g. `mra timber.mra`. These list the required files by
+  CRC32 with no copyrighted data.
+- **`pack_rom.py`**: `python pack_rom.py all` (matches the dumps by CRC32).
+
+Both produce byte-identical images.
 
 ## Credits
 

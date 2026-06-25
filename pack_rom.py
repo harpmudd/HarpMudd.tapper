@@ -94,6 +94,19 @@ GAMES = {
 }
 
 
+def flat_defs(game):
+    """Flat [(crc, size, desc, offset)] for one game, for _gen_mra.py. Offsets come
+    from the region tables; the variant byte + padding past 0x3A000 are picked up
+    by _gen_mra as trailing fill (read from the reference .rom)."""
+    desc, cpu, snd, spr, bg = GAMES[game]
+    out = []
+    for crc, (off, sz) in zip(cpu, CPU_OFF): out.append((crc, sz, "cpu", off))
+    for crc, (off, sz) in zip(snd, SND_OFF): out.append((crc, sz, "snd", off))
+    for crc, (off, sz) in zip(spr, SPR_OFF): out.append((crc, sz, "spr", off))
+    for crc, (off, sz) in zip(bg,  BG_OFF):  out.append((crc, sz, "bg",  off))
+    return out
+
+
 def crc32_of(data):
     return zlib.crc32(data) & 0xFFFFFFFF
 
