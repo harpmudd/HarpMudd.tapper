@@ -47,12 +47,15 @@ thanks to Sorgelig and Dar.
 
 ## Controls
 
-| Pocket | Action |
-|---|---|
-| **D-Pad** | Move between / along the bars |
-| **A** | Pour / serve & collect mugs |
-| **Start** | 1P Start |
-| **Select** | Insert coin |
+| Pocket | Tapper | Timber |
+|---|---|---|
+| **D-Pad** | Move between / along the bars | Move the lumberjack (4-way) |
+| **A** | Pour / serve & collect mugs | Chop |
+| **B** | — | Chop (other side) |
+| **Start** | 1P Start | 1P Start |
+| **Select** | Insert coin | Insert coin |
+
+Timber is 2-player — player 2 uses the second controller (its D-Pad, A and B).
 
 ## Using It
 
