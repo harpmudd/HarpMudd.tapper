@@ -1,7 +1,13 @@
 # Tapper — Analogue Pocket
 
 An Analogue Pocket port of **Tapper** (Bally Midway, 1983) by **HarpMudd**, built
-on the openFPGA framework.
+on the openFPGA framework. One core, every edition — selectable from the Pocket
+library:
+
+- **Tapper** — Budweiser, 1/27/84 (the classic)
+- **Tapper (Root Beer)** — the soda re-theme
+- **Tapper (Suntory)** — the Japanese release
+- **Tapper (Alternate Graphics)** and the **1/12/84** and **12/9/83** revisions
 
 ## The Game
 
@@ -10,6 +16,9 @@ down the line to a never-ending crowd of thirsty patrons — then catch the empt
 they slide back before they smash. Scoop up tips, keep every customer from
 reaching the end of the bar, and survive the rush across saloon, sports bar, punk
 bar and space bar. A frantic, beloved test of timing and nerve.
+
+All editions are the same MCR hardware — they differ only in ROMs, so one
+bitstream runs them all.
 
 ## Hardware
 
@@ -40,13 +49,20 @@ thanks to Sorgelig and Dar.
 | **Start** | 1P Start |
 | **Select** | Insert coin |
 
+## Using It
+
+Copy `Cores/`, `Assets/` and `Platforms/` to your Pocket's SD card. Each edition
+is a small instance JSON in `Assets/tapper/HarpMudd.tapper/`; launch the core and
+you drop straight into that folder to pick one, or browse to it from the Pocket
+library. The selected edition is loaded by its `.json`.
+
 ## ROMs
 
-ROMs are **not** included. Build your own from the bundled `.mra` recipe in
-`Assets/tapper/common/` — it lists the required MAME romset files by name and
-CRC32, with no copyrighted data. Run it through the `mra` tool to produce
-`tapper.rom`, then keep that `.rom` in the same folder (and on your Pocket SD
-card).
+ROMs are **not** included — nothing in this repo contains copyrighted data.
+Supply your own MAME romsets (`tapper`, `rbtapper`, `sutapper`, `tapperg`,
+`tappera`, `tapperb`) and build the per-edition `.rom` images with `pack_rom.py`
+into `Assets/tapper/common/`. `pack_rom.py` matches the required files by CRC32,
+so it only assembles the correct, verified dumps.
 
 ## Credits
 

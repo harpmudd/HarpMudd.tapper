@@ -392,42 +392,36 @@ wire [15:0] cpu_rom_addr;
 wire [7:0]  cpu_rom_do_r;
 wire [7:0]  cpu_rom_do_to_mcr3;  // forwarded to mcr3.cpu_rom_do with byte-0 patch
 
-// CPU ROM pre-initialized from cpu_rom.hex via $readmemh. Bypasses data_loader
-// entirely for the CPU ROM contents -- the BRAM is loaded at FPGA configuration
-// time. data_loader writes to this region are now ignored (silently overwritten
-// by the same data, so harmless).
+// CPU ROM loaded at runtime from the APF bridge (data_loader), like snd/sprite/bg.
+// (Was baked from cpu_rom.hex via $readmemh; that locked the core to one game and
+// needed the ROM hex in-tree. Runtime loading enables multi-game selection and lets
+// the published source build without any baked ROM data.) The game is held in reset
+// until rom_loaded, so the CPU never executes stale/partial ROM.
 (* ramstyle = "M10K" *) reg [7:0] cpu_rom_mem [0:65535];
 reg [7:0] cpu_rom_do_r_reg;
-initial begin
-    $readmemh("cpu_rom.hex", cpu_rom_mem);
-end
 
 always @(posedge clk_sys) begin
+    if (cpu_rom_we) cpu_rom_mem[dn_addr[15:0]] <= dn_data;
     cpu_rom_do_r_reg <= cpu_rom_mem[cpu_rom_addr];
 end
 assign cpu_rom_do_r        = cpu_rom_do_r_reg;
 assign cpu_rom_do_to_mcr3  = cpu_rom_do_r;
 
-// -- Sound ROM (16 KB) -- back to data_loader, plus .hex pre-init as backup
+// -- Sound ROM (16 KB) -- loaded at runtime from data_loader
 (* ramstyle = "M10K" *) reg [7:0] snd_rom_mem [0:16383];
 reg  [7:0]  snd_rom_do_r;
 wire [13:0] snd_rom_addr;
 wire [13:0] snd_rom_waddr = dn_addr[13:0] - 14'h2000;
-initial $readmemh("snd_rom.hex", snd_rom_mem);
 always @(posedge clk_sys) begin
     if (snd_rom_we) snd_rom_mem[snd_rom_waddr] <= dn_data;
     snd_rom_do_r <= snd_rom_mem[snd_rom_addr];
 end
 
-// -- Sprite ROM (32K x 32-bit, 4 byte lanes) -- back to data_loader + .hex --
+// -- Sprite ROM (32K x 32-bit, 4 byte lanes) -- loaded at runtime from data_loader
 (* ramstyle = "M10K" *) reg [7:0] sprite_rom_b0 [0:32767];
 (* ramstyle = "M10K" *) reg [7:0] sprite_rom_b1 [0:32767];
 (* ramstyle = "M10K" *) reg [7:0] sprite_rom_b2 [0:32767];
 (* ramstyle = "M10K" *) reg [7:0] sprite_rom_b3 [0:32767];
-initial $readmemh("sprite_b0.hex", sprite_rom_b0);
-initial $readmemh("sprite_b1.hex", sprite_rom_b1);
-initial $readmemh("sprite_b2.hex", sprite_rom_b2);
-initial $readmemh("sprite_b3.hex", sprite_rom_b3);
 reg  [7:0]  spr_b0_r, spr_b1_r, spr_b2_r, spr_b3_r;
 wire [14:0] sp_addr;
 wire [31:0] sp_graphx32_do = {spr_b3_r, spr_b2_r, spr_b1_r, spr_b0_r};

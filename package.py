@@ -23,10 +23,11 @@ import struct
 import subprocess
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+DIST_ROOT     = os.path.join(PROJECT_ROOT, "dist")
 BITSTREAM_SRC = os.path.join(PROJECT_ROOT, "src", "fpga", "output_files", "ap_core.rbf")
-CORE_DST      = os.path.join(PROJECT_ROOT, "Cores", "HarpMudd.tapper")
+CORE_DST      = os.path.join(DIST_ROOT, "Cores", "HarpMudd.tapper")
 BITSTREAM_DST = os.path.join(CORE_DST, "bitstream.rbf_r")
-ROM_DST       = os.path.join(PROJECT_ROOT, "Assets", "tapper", "common", "tapper.rom")
+ROM_DST       = os.path.join(DIST_ROOT, "Assets", "tapper", "common", "tapper.rom")
 PACK_ROM_PY   = os.path.join(PROJECT_ROOT, "pack_rom.py")
 SD_DIRS       = ("Cores", "Assets", "Platforms")
 
@@ -75,15 +76,15 @@ def main():
                 print("Provide a complete MAME pacman.zip and re-run.")
                 sys.exit(1)
 
-    # 3. Summary  (the distribution lives at the repo root: Cores/ Assets/ Platforms/)
-    print("\n=== Package contents (repo root) ===")
+    # 3. Summary  (the distribution lives under dist/: Cores/ Assets/ Platforms/)
+    print("\n=== Package contents (dist/) ===")
     for top in SD_DIRS:
-        top_path = os.path.join(PROJECT_ROOT, top)
+        top_path = os.path.join(DIST_ROOT, top)
         if not os.path.isdir(top_path):
             continue
         for root, dirs, files in os.walk(top_path):
             dirs.sort()
-            level = root.replace(PROJECT_ROOT, "").count(os.sep) - 1
+            level = root.replace(DIST_ROOT, "").count(os.sep) - 1
             indent = "  " * level
             print(f"{indent}{os.path.basename(root)}/")
             for f in sorted(files):
@@ -91,9 +92,9 @@ def main():
                 print(f"{indent}  {f}  ({size:,} bytes)")
 
     print("\n=== Copy to Pocket SD card ===")
-    print("Copy the Cores/ Assets/ Platforms/ folders to the root of your Pocket SD card:")
+    print("Copy the contents of dist/ to the root of your Pocket SD card:")
     for top in SD_DIRS:
-        print(f"  xcopy /E /Y \"{os.path.join(PROJECT_ROOT, top)}\" X:\\{top}\\")
+        print(f"  xcopy /E /Y \"{os.path.join(DIST_ROOT, top)}\" X:\\{top}\\")
     print("(replace X: with your Pocket SD card drive letter)")
 
 

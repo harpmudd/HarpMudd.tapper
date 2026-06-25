@@ -31,6 +31,3 @@ __pycache__/
 *.zip
 *.hex
 *.mif
-
-# ── Local build staging (distribution is tracked at repo root, not dist/) ──
-dist/
