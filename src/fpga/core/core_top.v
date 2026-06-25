@@ -462,17 +462,32 @@ wire m_coin1   = cont1_key[14];   // SELECT  -> Coin (HarpMudd arcade convention
 wire m_start1  = cont1_key[15];   // START   -> 1P Start
 wire m_start2  = cont2_key[15];   // P2 START -> 2P Start
 wire m_service = 1'b0;
-wire m_fire_a  = cont1_key[4];    // A        -> Fill mug
-wire m_up      = cont1_key[0];
-wire m_down    = cont1_key[1];
-wire m_left    = cont1_key[2];
-wire m_right   = cont1_key[3];
 
-// MAME shows IPT_VBLANK on IP0 bit 7 for some MCR3 boards. Drive it from mcr3's
-// vid_vblank so Z80's vblank-polling loop can break out. Active low (= 0 during vblank).
+// Per-player joystick + buttons.  P1 = controller 1, P2 = controller 2.
+wire m_up1 = cont1_key[0], m_dn1 = cont1_key[1], m_lf1 = cont1_key[2], m_rt1 = cont1_key[3];
+wire m_up2 = cont2_key[0], m_dn2 = cont2_key[1], m_lf2 = cont2_key[2], m_rt2 = cont2_key[3];
+wire m_p1a = cont1_key[4], m_p1b = cont1_key[5];   // A, B  (Tapper: pour / Timber: chop)
+wire m_p2a = cont2_key[4], m_p2b = cont2_key[5];
+
+// Variant byte (image 0x3A000) selects the MiSTer Arcade-MCR3 `mod`:
+//   0 = Tapper (all editions, 1 button, input_2 mirrors input_1)
+//   1 = Timber (2 buttons/player, input_1=P1, input_2=P2)
+// Snooped off the load stream. It never reaches mcr3 (the cpu/snd/sprite/bg
+// region forwards are all gated to dn_addr < 0x3A000), and is stable before the
+// CPU runs (game held in reset until rom_loaded).
+reg variant_timber = 1'b0;
+always @(posedge clk_sys)
+    if (dn_wr && !rom_loaded && dn_addr == 18'h3A000)
+        variant_timber <= dn_data[0];
+
+// MAME shows IPT_VBLANK on IP0 bit 7 for MCR3 boards (both games). Active low.
 wire [7:0] input_0 = ~{vid_vblank, 3'b000, m_start2, m_start1, 1'b0, m_coin1};
-wire [7:0] input_1 = ~{3'b000, m_fire_a, m_up, m_down, m_left, m_right};
-wire [7:0] input_2 = ~{3'b000, m_fire_a, m_up, m_down, m_left, m_right};
+wire [7:0] input_1 = variant_timber
+        ? ~{2'b00, m_p1a, m_p1b, m_up1, m_dn1, m_lf1, m_rt1}   // Timber P1 (2 buttons)
+        : ~{3'b000, m_p1a, m_up1, m_dn1, m_lf1, m_rt1};        // Tapper (A = pour)
+wire [7:0] input_2 = variant_timber
+        ? ~{2'b00, m_p2a, m_p2b, m_up2, m_dn2, m_lf2, m_rt2}   // Timber P2
+        : ~{3'b000, m_p1a, m_up1, m_dn1, m_lf1, m_rt1};        // Tapper mirrors P1
 
 // DIPs default per .mra "FF 00" -- all DIPs in their off/first state.
 wire [7:0] input_3 = 8'hFF;

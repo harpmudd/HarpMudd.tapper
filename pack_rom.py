@@ -29,7 +29,15 @@ import os
 
 DEFAULT_ZIP_DIR = r"C:\Projects\Downloaded_Artifacts"
 ASSETS_DIR      = r"C:\Projects\HarpMudd.tapper\dist\Assets\tapper\common"
-ROM_IMAGE_SIZE  = 0x3A000
+
+# Variant byte at 0x3A000 selects the MiSTer Arcade-MCR3 `mod` in core_top.v:
+#   0 = Tapper (all editions, mod=0)   1 = Timber (mod=1, 2-button/2-player inputs)
+# The byte sits PAST the 0x3A000 data end (image padded to 0x3A200). core_top
+# snoops it; the cpu/snd/sprite/bg region forwards to mcr3 are all gated to
+# dn_addr < 0x3A000, so it never reaches mcr3's dl_addr demux (no aliasing).
+VARIANT_OFFSET  = 0x3A000
+ROM_IMAGE_SIZE  = 0x3A200
+VARIANTS        = {"timber": 1}   # default 0 (Tapper editions)
 
 # Fixed region offsets/sizes (same for every edition). Each edition supplies its
 # four ROM-CRC lists in MAME ROM_START order; they drop into these slots.
@@ -76,6 +84,13 @@ GAMES = {
         [0x0e8bb9d5, 0x0cf0e29b, 0x31eb6dc6, 0x01a9be6a],
         [0x32509011, 0x8412c808, 0x818fffd4, 0x67e37690, 0x800f7c8a, 0x32674ee6, 0x070b4c81, 0xa37aef36],
         [0x2a30238c, 0x394ab576]),
+
+    # Timber - same 91490 board, MCR mod=1 (only 3 sound ROMs). variant byte = 1.
+    "timber": ("Timber",
+        [0x377032ab, 0xfd772836, 0x632989f9, 0xdae8a0dc],
+        [0xc615dc3e, 0x83841c87, 0x22bcdcd3],
+        [0x81de4a73, 0x7f3a4f59, 0x37c03272, 0xe2c2885c, 0xeb636216, 0xb7105eb7, 0xd9c27475, 0x244778e8],
+        [0xb1cb2651, 0x2ae352c4]),
 }
 
 
@@ -120,10 +135,11 @@ def build(game, found):
         for e in errors:
             print(e)
         return False
+    image[VARIANT_OFFSET] = VARIANTS.get(game, 0)
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, "wb") as f:
         f.write(image)
-    print(f"  SUCCESS: {len(image)} bytes (0x{len(image):X})")
+    print(f"  SUCCESS: {len(image)} bytes (0x{len(image):X}, variant {VARIANTS.get(game, 0)})")
     return True
 
 

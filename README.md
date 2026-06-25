@@ -8,6 +8,11 @@ library:
 - **Tapper (Root Beer)** — the soda re-theme
 - **Tapper (Suntory)** — the Japanese release
 - **Tapper (Alternate Graphics)** and the **1/12/84** and **12/9/83** revisions
+- **Timber** — Bally Midway's lumberjack game on the same board
+
+Tapper and Timber are the same MCR hardware; a variant byte in each ROM image
+tells the core which input layout to use (Timber adds a second action button and
+second player).
 
 ## The Game
 
