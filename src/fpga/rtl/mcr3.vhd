@@ -368,8 +368,13 @@ begin
 					if hcnt = 512+13+9+6 then video_hs <= '0'; end if; -- front porch 16/25*20 = 13
 					if hcnt = 512+90+9+6 then video_hs <= '1'; end if; -- sync pulse  96/25*20 = 77
 																				       -- back porch  48/25*20 = 38
+					-- Active region 512 pixels (hcnt 18..529), matching video.json
+					-- width=512. The original progressive branch gated at 514+16-1
+					-- (511 pixels), one short of the declared width, so the Pocket
+					-- captured a stray transition column at the right edge (faint
+					-- pink 1px bar). Removing the -1 matches the interlaced branch fix.
 					video_hblank <= '1';
-					if hcnt >= 2+16 and hcnt < 514+16-1 then
+					if hcnt >= 2+16 and hcnt < 514+16 then
 						video_hblank <= '0';
 					end if;
 

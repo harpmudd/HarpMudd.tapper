@@ -1,9 +1,9 @@
 // mf_pllbase_0002.v - altera_pll for Tapper (MCR3) Pocket core
 // Input 74.25 MHz:
 //   outclk_0: 40.000 MHz (clk_sys -> mcr3.clock_40, ROM loader, audio)
-//   outclk_1: 10.000 MHz (clk_vid, pixel clock)
-//   outclk_2: 10.000 MHz 90 deg (clk_vid_90, for APF DDR video clock output)
-// 90 deg at 10 MHz period (100000 ps) = 25000 ps phase shift.
+//   outclk_1: 20.000 MHz (clk_vid, pixel clock - 31kHz progressive / 480p)
+//   outclk_2: 20.000 MHz 90 deg (clk_vid_90, for APF DDR video clock output)
+// 90 deg at 20 MHz period (50000 ps) = 12500 ps phase shift.
 `timescale 1ns/10ps
 module mf_pllbase_0002 (
     input  wire refclk,
@@ -22,11 +22,11 @@ module mf_pllbase_0002 (
         .output_clock_frequency0("40.000000 MHz"),
         .phase_shift0("0 ps"),
         .duty_cycle0(50),
-        .output_clock_frequency1("10.000000 MHz"),
+        .output_clock_frequency1("20.000000 MHz"),
         .phase_shift1("0 ps"),
         .duty_cycle1(50),
-        .output_clock_frequency2("10.000000 MHz"),
-        .phase_shift2("25000 ps"),
+        .output_clock_frequency2("20.000000 MHz"),
+        .phase_shift2("12500 ps"),
         .duty_cycle2(50),
         .output_clock_frequency3("0 MHz"),
         .phase_shift3("0 ps"),
