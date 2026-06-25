@@ -11,8 +11,7 @@ library:
 - **Timber** — Bally Midway's lumberjack game on the same board
 
 Tapper and Timber are the same MCR hardware; a variant byte in each ROM image
-tells the core which input layout to use (Timber adds a second action button and
-second player).
+tells the core which input layout to use (Timber adds a second action button).
 
 ## The Game
 
@@ -54,8 +53,6 @@ thanks to Sorgelig and Dar.
 | **B** | — | Chop (other side) |
 | **Start** | 1P Start | 1P Start |
 | **Select** | Insert coin | Insert coin |
-
-Timber is 2-player — player 2 uses the second controller (its D-Pad, A and B).
 
 ## Using It
 
