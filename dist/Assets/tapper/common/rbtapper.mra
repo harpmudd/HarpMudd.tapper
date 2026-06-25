@@ -1,13 +1,13 @@
 <misterromdescription>
 	<name>Tapper (Root Beer)</name>
-	<setname>tapper</setname>
+	<setname>rbtapper</setname>
 	<year>1984</year>
 	<manufacturer>Bally Midway</manufacturer>
 	<!--
 	  HarpMudd Tapper (Root Beer) - Analogue Pocket core ROM recipe (no copyrighted data).
 	  Build:  mra rbtapper.mra   then copy the .rom into Assets/tapper/common/.
 	-->
-	<rom index="0" zip="rbtapper.zip" md5="none">
+	<rom index="0" zip="tapper.zip|rbtapper.zip" md5="none">
 		<part crc="20b9adf4" name="rbtpg0.bin"></part>
 		<part crc="87e616c2" name="rbtpg1.bin"></part>
 		<part crc="0b332c97" name="rbtpg2.bin"></part>
