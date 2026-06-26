@@ -1,0 +1,25 @@
+name: Attach release zip
+
+on:
+  release:
+    types: [created]
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create zip of dist contents
+        run: |
+          cd dist
+          zip -r "../HarpMudd.tapper_${{ github.event.release.tag_name }}.zip" .
+
+      - name: Upload zip to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: HarpMudd.tapper_${{ github.event.release.tag_name }}.zip
