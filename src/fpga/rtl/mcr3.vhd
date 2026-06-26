@@ -378,14 +378,14 @@ begin
 						video_hblank <= '0';
 					end if;
 
-					-- Top overscan crop: blank the top 4 lines. MAME shows the full
+					-- Top overscan crop: blank the top 2 lines. MAME shows the full
 					-- 512x480 raster (visarea 0..479), so sprites the game parks/wraps
 					-- just above the playfield (e.g. a sliver tracking the bartender)
 					-- are visible here, whereas the arcade CRT bezel hid them. Cropping
 					-- the top overscan hides them. Tunable: increase if the line remains,
 					-- decrease if it clips the score. video.json height must = 480 - crop.
 					video_vblank <= '1';
-					if vcnt >= 4 and vcnt < 480 then
+					if vcnt >= 2 and vcnt < 480 then
 						video_vblank <= '0';
 					end if;
 
