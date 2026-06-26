@@ -7,7 +7,7 @@
 	  HarpMudd Tapper (Suntory) - Analogue Pocket core ROM recipe (no copyrighted data).
 	  Build:  mra sutapper.mra   then copy the .rom into Assets/tapper/common/.
 	-->
-	<rom index="0" zip="tapper.zip|sutapper.zip" md5="none">
+	<rom index="0" zip="sutapper.zip" md5="none">
 		<part crc="87119cc4" name="epr-5791"></part>
 		<part crc="4c23ad89" name="epr-5792"></part>
 		<part crc="fecbf683" name="epr-5793"></part>

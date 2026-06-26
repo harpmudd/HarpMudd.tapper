@@ -7,7 +7,7 @@
 	  HarpMudd Timber - Analogue Pocket core ROM recipe (no copyrighted data).
 	  Build:  mra timber.mra   then copy the .rom into Assets/tapper/common/.
 	-->
-	<rom index="0" zip="tapper.zip|timber.zip" md5="none">
+	<rom index="0" zip="timber.zip" md5="none">
 		<part crc="377032ab" name="timpg0.bin"></part>
 		<part crc="fd772836" name="timpg1.bin"></part>
 		<part crc="632989f9" name="timpg2.bin"></part>
