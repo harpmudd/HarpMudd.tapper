@@ -6,8 +6,9 @@
 	<!--
 	  HarpMudd Tapper (Budweiser, 12-9-83) - Analogue Pocket core ROM recipe (no copyrighted data).
 	  Build:  mra tapperb.mra   then copy the .rom into Assets/tapper/common/.
+	  Requires the parent tapper.zip in the rom folder too (split set).
 	-->
-	<rom index="0" zip="tapper.zip|tapperb.zip" md5="none">
+	<rom index="0" zip="tapperb.zip|tapper.zip" md5="none">
 		<part crc="496a8e04" name="tapper_c.p.u._pg_0_1c_12-9-83.1c"></part>
 		<part crc="e79c4b0c" name="tapper_c.p.u._pg_1_2c_12-9-83.2c"></part>
 		<part crc="3034ccf0" name="tapper_c.p.u._pg_2_3c_12-9-83.3c"></part>
