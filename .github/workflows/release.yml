@@ -17,9 +17,9 @@ jobs:
       - name: Create zip of dist contents
         run: |
           cd dist
-          zip -r "../HarpMudd.tapper_${{ github.event.release.tag_name }}.zip" .
+          zip -r "../HarpMudd.Tapper_${{ github.event.release.tag_name }}.zip" .
 
       - name: Upload zip to release
         uses: softprops/action-gh-release@v2
         with:
-          files: HarpMudd.tapper_${{ github.event.release.tag_name }}.zip
+          files: HarpMudd.Tapper_${{ github.event.release.tag_name }}.zip

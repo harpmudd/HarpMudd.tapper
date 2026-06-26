@@ -8,7 +8,7 @@ under Assets/tapper/common/ but is git-ignored (copyrighted, never pushed).
 Steps:
   1. Verify the bitstream exists in src/fpga/output_files/
   2. Convert .rbf -> .rbf_r (byte-reversed bitstream for Pocket)
-  3. Copy bitstream to Cores/HarpMudd.tapper/bitstream.rbf_r
+  3. Copy bitstream to Cores/HarpMudd.Tapper/bitstream.rbf_r
   4. Run pack_rom.py to generate tapper.rom (if not already present)
   5. Print copy instructions for the Pocket SD card
 
@@ -25,7 +25,7 @@ import subprocess
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 DIST_ROOT     = os.path.join(PROJECT_ROOT, "dist")
 BITSTREAM_SRC = os.path.join(PROJECT_ROOT, "src", "fpga", "output_files", "ap_core.rbf")
-CORE_DST      = os.path.join(DIST_ROOT, "Cores", "HarpMudd.tapper")
+CORE_DST      = os.path.join(DIST_ROOT, "Cores", "HarpMudd.Tapper")
 BITSTREAM_DST = os.path.join(CORE_DST, "bitstream.rbf_r")
 ROM_DST       = os.path.join(DIST_ROOT, "Assets", "tapper", "common", "tapper.rom")
 PACK_ROM_PY   = os.path.join(PROJECT_ROOT, "pack_rom.py")

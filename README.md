@@ -57,7 +57,7 @@ thanks to Sorgelig and Dar.
 ## Using It
 
 Copy `Cores/`, `Assets/` and `Platforms/` to your Pocket's SD card. Each edition
-is a small instance JSON in `Assets/tapper/HarpMudd.tapper/`; launch the core and
+is a small instance JSON in `Assets/tapper/HarpMudd.Tapper/`; launch the core and
 you drop straight into that folder to pick one, or browse to it from the Pocket
 library. The selected edition is loaded by its `.json`.
 
