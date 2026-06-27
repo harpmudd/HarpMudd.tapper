@@ -71,7 +71,7 @@ Supply your own MAME romsets (`tapper`, `rbtapper`, `sutapper`, `tapperg`,
 - **`.mra` recipe** (one per game in `Assets/tapper/common/`): run it through the
   standard `mra` tool — e.g. `mra timber.mra`. These list the required files by
   CRC32 with no copyrighted data.
-- **`pack_rom.py`**: `python pack_rom.py all` (matches the dumps by CRC32).
+- **`pack_rom.py`**: drop the romset zips next to `pack_rom.py` and run `python pack_rom.py all` (matches the dumps by CRC32).
 
 Both produce byte-identical images.
 

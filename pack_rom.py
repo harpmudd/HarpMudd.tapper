@@ -27,8 +27,12 @@ import zipfile
 import zlib
 import os
 
-DEFAULT_ZIP_DIR = r"C:\Projects\Downloaded_Artifacts"
-ASSETS_DIR      = r"C:\Projects\HarpMudd.tapper\dist\Assets\tapper\common"
+HERE = os.path.dirname(os.path.abspath(__file__))
+# Romsets: prefer the shared dev artifacts dir if it exists, otherwise this
+# repo folder -- a cloned user just drops their MAME .zip files next to this script.
+_DEV_ARTIFACTS = r"C:\Projects\Downloaded_Artifacts"
+DEFAULT_ZIP_DIR = _DEV_ARTIFACTS if os.path.isdir(_DEV_ARTIFACTS) else HERE
+ASSETS_DIR      = os.path.join(HERE, "dist", "Assets", "tapper", "common")
 
 # Variant byte at 0x3A000 selects the MiSTer Arcade-MCR3 `mod` in core_top.v:
 #   0 = Tapper (all editions, mod=0)   1 = Timber (mod=1, 2-button/2-player inputs)
