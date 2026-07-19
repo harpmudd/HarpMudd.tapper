@@ -4,7 +4,7 @@
         "metadata": {
             "platform_ids": ["tapper"],
             "shortname": "Tapper",
-            "description": "Tapper - all editions (Budweiser, Root Beer, Suntory) plus Timber, on Bally Midway MCR hardware. Port by HarpMudd.",
+            "description": "Tapper / Timber (Bally Midway, 1983)",
             "author": "HarpMudd",
             "url": "",
             "version": "1.4.0",
