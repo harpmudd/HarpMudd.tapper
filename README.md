@@ -1,7 +1,7 @@
 # Tapper — Analogue Pocket
 
-An Analogue Pocket port of **Tapper** (Bally Midway, 1983) by **HarpMudd**, built
-on the openFPGA framework. One core, every edition — selectable from the Pocket
+An Analogue Pocket port of **Tapper** (Bally Midway, 1983), built on the
+openFPGA framework. One core, every edition — selectable from the Pocket
 library:
 
 - **Tapper** — Budweiser, 1/27/84 (the classic)
