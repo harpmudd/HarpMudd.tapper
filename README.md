@@ -90,6 +90,7 @@ Both produce byte-identical images.
   - **Alexey Melnikov (Sorgelig)** — timing accuracy and ZEXDOC / ZEXALL /
     Z80Full / Z80memptr verification (Ver 350, 2018), and the `T80pa`
     pseudo-asynchronous top level
+- **YM2149 (AY-3-8910) sound core:** Mike Johnson / [MikeJ](https://www.fpgaarcade.com) (FPGAArcade), Jan 2005
 - **SDRAM controller, data loader, I2S audio, sync FIFO:** Adam Gastineau (agg23)
 - **openFPGA framework (APF), bridge command handler, reference `core_top`:** Analogue
 - **PLL and other megafunctions:** Intel/Altera (Quartus-generated)
