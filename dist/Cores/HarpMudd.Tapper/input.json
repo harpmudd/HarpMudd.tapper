@@ -3,9 +3,28 @@
         "magic": "APF_VER_1",
         "controllers": [
             {
-                "type": "gamepad",
+                "type": "default",
                 "mappings": [
-                    { "type": "analog_stick", "axis": "left", "target": "dpad" }
+                    {
+                        "id": 0,
+                        "name": "Pour / Chop",
+                        "key": "pad_btn_a"
+                    },
+                    {
+                        "id": 1,
+                        "name": "Chop left (Timber)",
+                        "key": "pad_btn_b"
+                    },
+                    {
+                        "id": 2,
+                        "name": "Coin",
+                        "key": "pad_btn_select"
+                    },
+                    {
+                        "id": 3,
+                        "name": "Start",
+                        "key": "pad_btn_start"
+                    }
                 ]
             }
         ]
